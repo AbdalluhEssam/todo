@@ -148,3 +148,52 @@ Widget tasksBuilder({required List<Map> tasks}) => tasks.isNotEmpty
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
       );
+
+Widget buildArticleItem(article) => Padding(
+  padding: const EdgeInsets.all(15.0),
+  child:   Row(
+        children: [
+          Container(
+            width: 120,
+            height: 120,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image:  DecorationImage(
+                    image:NetworkImage("${article['urlToImage']}"),
+                    fit: BoxFit.cover)),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          Expanded(
+              child: SizedBox(
+            height: 120,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children:  [
+                Expanded(
+                  child: Text("${article['title']}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis),
+                ),
+                Text(
+                  "${article['publishedAt']}",
+                  style: const TextStyle(color: Colors.grey),
+                )
+              ],
+            ),
+          ))
+        ],
+      ),
+);
+Widget myDivider() => Container(
+
+  color: Colors.grey,
+  margin: const EdgeInsets.symmetric(horizontal: 10),
+  height: 1,
+);
