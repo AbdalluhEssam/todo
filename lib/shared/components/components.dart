@@ -1,3 +1,4 @@
+import 'package:course_udemy/layout/news_app/web_view.dart';
 import 'package:course_udemy/shared/cubit/cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -44,15 +45,25 @@ Widget defaultTextFormField(
       readOnly: readOnly,
       onTap: onTap,
       decoration: InputDecoration(
-          labelText: labelText,
-          prefixIcon: Icon(icon),
-          suffixIcon: suffixIcon != null
-              ? IconButton(
-                  icon: Icon(suffixIcon),
-                  onPressed: suffixPressed,
-                )
-              : null,
-          border: const OutlineInputBorder()),
+        labelText: labelText,
+        labelStyle: const TextStyle(color: Colors.grey),
+        prefixIcon: Icon(
+          icon,
+          color: Colors.grey,
+        ),
+        suffixIcon: suffixIcon != null
+            ? IconButton(
+                icon: Icon(suffixIcon),
+                onPressed: suffixPressed,
+              )
+            : null,
+        border: const OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.grey, width: 2, style: BorderStyle.solid)),
+        enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.grey, width: 2, style: BorderStyle.solid)),
+      ),
     );
 
 Widget buildTaskItem({
@@ -149,51 +160,57 @@ Widget tasksBuilder({required List<Map> tasks}) => tasks.isNotEmpty
         ),
       );
 
-Widget buildArticleItem(article) => Padding(
-  padding: const EdgeInsets.all(15.0),
-  child:   Row(
-        children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image:  DecorationImage(
-                    image:NetworkImage("${article['urlToImage']}"),
-                    fit: BoxFit.cover)),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          Expanded(
-              child: SizedBox(
-            height: 120,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children:  [
-                Expanded(
-                  child: Text("${article['title']}",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis),
-                ),
-                Text(
-                  "${article['publishedAt']}",
-                  style: const TextStyle(color: Colors.grey),
-                )
-              ],
+Widget buildArticleItem(article, context) => Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: InkWell(
+        onTap: () {
+          navigateTo(context, WebViewScreen(url: article['url']));
+        },
+        child: Row(
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                      image: NetworkImage(article['urlToImage'] == null
+                          ? "https://pbs.twimg.com/profile_images/1507333967602753539/l_ZBzlWf_400x400.jpg"
+                          : "${article['urlToImage']}"),
+                      fit: BoxFit.cover)),
             ),
-          ))
-        ],
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+                child: SizedBox(
+              height: 120,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text("${article['title']}",
+                        style: Theme.of(context).textTheme.bodyText1,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                  Text(
+                    "${article['publishedAt']}",
+                    style: const TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+            ))
+          ],
+        ),
       ),
-);
+    );
 Widget myDivider() => Container(
+      color: Colors.grey,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      height: 1,
+    );
 
-  color: Colors.grey,
-  margin: const EdgeInsets.symmetric(horizontal: 10),
-  height: 1,
-);
+void navigateTo(context, widget) =>
+    Navigator.push(context, MaterialPageRoute(builder: (context) => widget));

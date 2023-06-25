@@ -46,7 +46,7 @@ class _MyHomePageState extends State<LohInScreen> {
                           if (val!.isEmpty) {
                             return "Email Address Not br Empty";
                           }
-                          return null!;
+                          return null;
                         },
                         controller: email,
                         keyboardType: TextInputType.emailAddress,
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<LohInScreen> {
                             if (val!.isEmpty) {
                               return "Password Not br Empty";
                             }
-                            return null!;
+                            return null;
                           },
                           controller: password,
                           keyboardType: TextInputType.visiblePassword,

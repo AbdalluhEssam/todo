@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print, unnecessary_null_comparison
+
 import 'package:course_udemy/shared/cubit/states.dart';
+import 'package:course_udemy/shared/network/local/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
@@ -18,6 +21,7 @@ class AppCubit extends Cubit<AppStates> {
   Database? database;
   int currentIndex = 0;
   bool isBottomSheetShown = false;
+  bool isDarkMode = false;
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
@@ -113,7 +117,7 @@ class AppCubit extends Cubit<AppStates> {
   getDataFromDatabase(database) {
     newTasks.clear();
     doneTasks.clear();
-    archiveTasks .clear();
+    archiveTasks.clear();
     emit(AppGetDataFormDBLoadingState());
     database!.rawQuery('SELECT * FROM tasks').then((value) {
       value.forEach((element) {
@@ -132,5 +136,17 @@ class AppCubit extends Cubit<AppStates> {
   void changeBottomSheet({required bool isShow}) {
     isBottomSheetShown = isShow;
     emit(AppChangBottomSheetState());
+  }
+
+  void changeDarkModeSheet({bool? formShared}) {
+    if (formShared != null) {
+      isDarkMode = formShared;
+      emit(AppChangDarkModeState());
+    } else {
+      isDarkMode = !isDarkMode;
+      CacheHelper.putData(key: "isDark", val: isDarkMode).then((value) {
+        emit(AppChangDarkModeState());
+      });
+    }
   }
 }

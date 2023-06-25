@@ -181,7 +181,7 @@ class Messenger extends StatelessWidget {
                                       color: Colors.blue,
                                       shape: BoxShape.circle),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
                                 const Text("02:00 pm")

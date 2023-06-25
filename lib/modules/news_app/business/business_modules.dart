@@ -12,7 +12,6 @@ class BusinessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NewsCubit, NewsStates>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         var cubit = NewsCubit.get(context);
@@ -21,7 +20,7 @@ class BusinessScreen extends StatelessWidget {
             ? ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemCount: cubit.business.length,
-                itemBuilder: (context, index) => buildArticleItem(list[index]),
+                itemBuilder: (context, index) => buildArticleItem(list[index],context),
                 separatorBuilder: (BuildContext context, int index) {
                   return myDivider();
                 },
