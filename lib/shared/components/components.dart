@@ -44,6 +44,7 @@ Widget defaultTextFormField(
       onChanged: onChanged,
       readOnly: readOnly,
       onTap: onTap,
+      style: const TextStyle(color: Colors.grey),
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.grey),
