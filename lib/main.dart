@@ -15,9 +15,9 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
-  bool? isDark = CacheHelper.getData(key: 'isDark');
+  bool isDark = CacheHelper.getData(key: 'isDark') ?? true;
   runApp(MyApp(
-    isDark: isDark!,
+    isDark: isDark,
   ));
 }
 
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
                     elevation: 20,
                     backgroundColor: Colors.white),
                 textTheme: const TextTheme(
-                    bodyText1: TextStyle(
+                    bodyLarge: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             darkTheme: ThemeData(
-                iconTheme:const IconThemeData(color: Colors.white),
+                iconTheme: const IconThemeData(color: Colors.white),
                 scaffoldBackgroundColor: Colors.black26,
                 primaryColor: Colors.deepOrange,
                 progressIndicatorTheme:
@@ -114,7 +114,7 @@ class MyApp extends StatelessWidget {
                     elevation: 20,
                     backgroundColor: Colors.black26),
                 textTheme: const TextTheme(
-                    bodyText1: TextStyle(
+                    bodyLarge: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
