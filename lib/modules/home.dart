@@ -2,6 +2,7 @@ import 'package:course_udemy/layout/news_app/news_layout.dart';
 import 'package:course_udemy/modules/BMI/bmi_screen.dart';
 import 'package:course_udemy/shared/components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:course_udemy/layout/todo_app/todo_layout.dart';
 import '../shared/cubit/cubit.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,11 +36,11 @@ class HomeScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 1.2),
+                childAspectRatio: 1),
             children: [
               buildGridContainer(
                 "NEWS",
-                "assets/images/news.png",
+                "assets/images/img_2.png",
                 onTap: () {
                   navigateTo(context, const NewsLayout());
                 },
@@ -49,6 +50,13 @@ class HomeScreen extends StatelessWidget {
                 "assets/images/img.png",
                 onTap: () {
                   navigateTo(context, const BmiScreen());
+                },
+              ),
+              buildGridContainer(
+                "TODO",
+                "assets/images/img_1.png",
+                onTap: () {
+                  navigateTo(context, const HomeLayout());
                 },
               ),
               buildGridContainer("Logout", "assets/images/logout.png"),
@@ -69,14 +77,16 @@ Widget buildGridContainer(text, image, {void Function()? onTap}) {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            image,
-            width: 50,
-            fit: BoxFit.cover,
-            color: Colors.black,
-            height: 50,
+          Expanded(
+            child: Image.asset(
+              image,
+              fit: BoxFit.cover,
+              height: 50,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Text(text,
               style: const TextStyle(
