@@ -2,9 +2,14 @@
 class Assets {
   Assets._();
 
+  static const String imagesAssignment = 'assets/images/assignment.png';
   static const String imagesDSC0034 = 'assets/images/DSC_0034.jpg';
   static const String imagesIcons8Female100 = 'assets/images/icons8-female-100.png';
   static const String imagesIcons8Male100 = 'assets/images/icons8-male-100.png';
   static const String imagesIcons8Male128px = 'assets/images/icons8_male_128px.png';
+  static const String imagesImg = 'assets/images/img.png';
+  static const String imagesImg1 = 'assets/images/img_1.png';
+  static const String imagesLogout = 'assets/images/logout.png';
+  static const String imagesNews = 'assets/images/news.png';
 
 }
